@@ -1,6 +1,11 @@
 import React, { Component } from 'react';
 import { MaterialEditor } from './MaterialEditor/MaterialEditor';
-import { addMaterial, getMaterial } from '../servise/api';
+import {
+  addMaterial,
+  getMaterial,
+  deleteMaterial,
+  updateMaterial,
+} from '../servise/api';
 import { Material } from './Materials/Materials';
 
 export class App extends Component {
@@ -34,8 +39,25 @@ export class App extends Component {
     }
   };
 
-  delMaterial = id => {
-    console.log(id);
+  delMaterial = async id => {
+    await deleteMaterial(id);
+    this.setState(prevState => ({
+      materials: prevState.materials.filter(material => material.id !== id),
+    }));
+  };
+
+  updateMaterial = async fields => {
+    try {
+      const updatedMaterial = await updateMaterial(fields);
+      this.setState(prevState => ({
+        materials: prevState.map(material =>
+          material.id === fields.id ? updatedMaterial : material
+        ),
+      }));
+    } catch (error) {
+      console.log(error);
+      this.setState({ error: 'Помилка' });
+    }
   };
 
   render() {

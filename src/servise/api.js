@@ -16,3 +16,8 @@ export const deleteMaterial = async id => {
   const res = await axios.delete(`/materials/${id}`);
   return res.data;
 };
+
+export const updateMaterial = async update => {
+  const res = await axios.put(`/materials/${update.id}`, update);
+  return res.data;
+};
