@@ -7,13 +7,18 @@ export class App extends Component {
   state = {
     materials: [],
     isLoading: false,
+    error: null,
   };
 
   async componentDidMount() {
     try {
+      this.setState({ isLoading: true });
       const initMaterials = await getMaterial();
-      this.setState({ materials: initMaterials });
-    } catch (error) {}
+      this.setState({ materials: initMaterials, isLoading: false });
+    } catch (error) {
+      console.log(error);
+      this.setState({ error: 'Помилка' });
+    }
   }
 
   addMaterial = async values => {
@@ -29,13 +34,17 @@ export class App extends Component {
     }
   };
 
+  delMaterial = id => {
+    console.log(id);
+  };
+
   render() {
     const { isLoading, materials } = this.state;
     return (
       <>
         {isLoading && <div>Loading...</div>}
         <MaterialEditor onSubmit={this.addMaterial} />
-        <Material items={materials} />
+        <Material items={materials} onDelete={this.delMaterial} />
       </>
     );
   }
