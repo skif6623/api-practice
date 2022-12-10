@@ -6,3 +6,8 @@ export const addMaterial = async values => {
   const res = await axios.post('/materials', values);
   return res.data;
 };
+
+export const getMaterial = async () => {
+  const res = await axios.get('/materials');
+  return res.data;
+};

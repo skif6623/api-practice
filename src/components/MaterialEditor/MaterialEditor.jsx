@@ -2,6 +2,7 @@ import { Formik, Form, Field } from 'formik';
 
 export const MaterialEditor = ({ onSubmit }) => {
   const handleSubmit = async (values, actions) => {
+    console.log(values);
     await onSubmit(values);
     actions.setSubmitting(false);
     actions.resetForm();
