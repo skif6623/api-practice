@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { MaterialEditor } from './MaterialEditor';
+import { MaterialEditor } from './MaterialEditor/MaterialEditor';
 import { addMaterial } from 'servise/api';
 
 export class App extends Component {

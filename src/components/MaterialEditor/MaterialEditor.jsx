@@ -1,6 +1,6 @@
 import { Formik, Form, Field } from 'formik';
 
-export const MaterialEditor = ({ onSubmit, isSubmitting }) => {
+export const MaterialEditor = ({ onSubmit }) => {
   const handleSubmit = async (values, actions) => {
     await onSubmit(values);
     actions.setSubmitting(false);
